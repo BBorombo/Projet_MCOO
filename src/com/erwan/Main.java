@@ -18,7 +18,12 @@ public class Main {
      */
     public static void visiteurExecution(Transition t){
         InterpreterExec i = (InterpreterExec) FabriqueInterpreter.getInstance().getInterpreter("Execution");
-        boolean autoValide = (boolean) t.acceptExec(i);
+        boolean tranValid = (boolean) t.acceptExec(i);
+        System.out.print("Transition : ");
+        if (tranValid)
+            System.out.println("Valide");
+        else
+            System.out.println("Invalide");
 
     }
 
@@ -64,7 +69,7 @@ public class Main {
         automate.ajouterEtat(e1);
         automate.ajouterEtat(e2);
         automate.ajouterEtat(e3);
-        automate.ajouterEtat(e4);
+//        automate.ajouterEtat(e4);
 
         // Ajout des transitions à l'automate
         automate.ajouterTransition(t1);

@@ -45,6 +45,14 @@ public class Transition implements ExprValid, ExprExec {
         this.etiquette = etiquette;
     }
 
+    public Automate getAutomate() {
+        return automate;
+    }
+
+    public void setAutomate(Automate automate) {
+        this.automate = automate;
+    }
+
     @Override
     public Object acceptValid(ExprVisiteurValid e) {
         return e.visitValid(this);

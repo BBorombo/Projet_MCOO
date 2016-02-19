@@ -1,5 +1,7 @@
 package com.erwan;
 
+import java.util.ArrayList;
+
 /**
  * Created by Erwan&Jonathan on 17/02/16.
  */
@@ -26,7 +28,14 @@ public final class InterpreterExec extends Interpreter implements ExprVisiteurEx
     @Override
     public Object visitExec(Transition t) {
         boolean valid = true;
-
+        ArrayList listEtats = t.getAutomate().getEtats();
+        if (!listEtats.contains(t.getSource()) || !listEtats.contains(t.getCible())) {
+            valid = false;
+            System.out.println("La transition n'appartient pas à l'automate.");
+        }
+        if (valid){
+            t.getSource().acceptExec(this);
+        }
         return valid;
     }
 

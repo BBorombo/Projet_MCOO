@@ -19,6 +19,7 @@ public class Automate implements ExprValid, ExprExec {
 
     public void ajouterTransition(Transition t){
         transitions.add(t);
+        t.setAutomate(this);
     }
 
     public String toString(){
