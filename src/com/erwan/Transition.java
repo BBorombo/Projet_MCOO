@@ -13,8 +13,12 @@ public class Transition implements ExprValid, ExprExec {
 
     public Transition(Etat source, Etat cible, Label etiquette) {
         this.source = source;
+        this.source.getTransSource().add(this);
         this.cible = cible;
+        this.cible.getTransCible().add(this);
         this.etiquette = etiquette;
+        this.etiquette.getTransitions().add(this);
+
     }
 
     public Etat getSource() {

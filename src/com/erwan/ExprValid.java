@@ -1,7 +1,7 @@
 package com.erwan;
 
 /**
- * Created by phantom on 02/02/16.
+ * Created by Erwan&Jonathan on 02/02/16.
  */
 public interface ExprValid {
 
