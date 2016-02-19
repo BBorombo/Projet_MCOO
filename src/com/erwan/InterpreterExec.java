@@ -25,7 +25,9 @@ public final class InterpreterExec extends Interpreter implements ExprVisiteurEx
 
     @Override
     public Object visitExec(Transition t) {
-        return null;
+        boolean valid = true;
+
+        return valid;
     }
 
     @Override

@@ -31,6 +31,6 @@ public class Label implements ExprValid, ExprExec {
 
     @Override
     public Object acceptExec(ExprVisiteurExec e) {
-        return null;
+        return e.visitExec(this);
     }
 }

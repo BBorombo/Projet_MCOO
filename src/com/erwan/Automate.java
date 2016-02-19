@@ -14,6 +14,7 @@ public class Automate implements ExprValid, ExprExec {
 
     public void ajouterEtat(Etat e){
         etats.add(e);
+        e.setAutomate(this);
     }
 
     public void ajouterTransition(Transition t){

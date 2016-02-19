@@ -18,19 +18,13 @@ public class Etat implements ExprValid, ExprExec{
 
     private ArrayList<Automate> sousAutomates = new ArrayList<>();
 
-    public Etat(String nom, Automate a){
-        this.nom = nom;
-        this.automate = a;
-        a.getEtats().add(this);
-    }
 
-    public Etat(String nom, Automate a, boolean initial, boolean finale){
+    public Etat(String nom, boolean initial, boolean finale){
         this.nom = nom;
-        this.automate = a;
-        a.getEtats().add(this);
         this.initial = initial;
         this.finale = finale;
     }
+
     public void ajouterSousAutomate(Automate a){
         sousAutomates.add(a);
     }

@@ -30,7 +30,7 @@ public final class InterpreterValid extends Interpreter implements ExprVisiteurV
         /********    VERIFICATION DETERMINISTE    *************/
         //On va regarder pour chaque transition si elle est valide
         for (Transition t : e.getTransSource()) {
-            boolean tValid = (boolean) visitValid(t);
+            boolean tValid = (boolean) t.acceptValid(this);
             if (tValid)
                 System.out.println("\t Transition "+ t.getEtiquette().getEtiquette() +" valide");
             else {
@@ -93,7 +93,7 @@ public final class InterpreterValid extends Interpreter implements ExprVisiteurV
     public Object visitValid(Transition t) {
         // On vérifie que l'etiquette de la transition est valide
         // Pour savoir si la transition est valide
-        boolean valid = (boolean) visitValid(t.getEtiquette());
+        boolean valid = (boolean) t.getEtiquette().acceptValid(this);
         Etat e = t.getSource();
         if (valid)
             System.out.println(e.getNom() + " : \n\t Label de Transition "+ t.getEtiquette().getEtiquette() +" Valide");
@@ -104,11 +104,15 @@ public final class InterpreterValid extends Interpreter implements ExprVisiteurV
 
     @Override
     public Object visitValid(Automate a) {
-
+        // On initialise l'automate comme étant valide
+        // et détarministe
         boolean valid = true;
         deterministe = true;
+        // On initialise le ocmpteur d"état initiaux à 0
         this.compteur = 0;
+
         boolean temp;
+        // Pour chaque état, on va vérifier si il est valide ou non
         for (Etat e: a.getEtats()) {
             temp  = (boolean) e.acceptValid(this);
             if (temp)
@@ -118,12 +122,17 @@ public final class InterpreterValid extends Interpreter implements ExprVisiteurV
                 System.out.println(e.getNom() + " : Invalide");
             }
         }
+        // On vérifie grace au compteur si l'automate à plus d'un état
+        // initial ou non
         if (this.compteur != 1) {
             valid = false;
             System.out.println("Automate : \n\t Invalide - Plus d'un état initial");
         }
+        // On vérifie grace a la variable booléenne si l'automate est
+        // déterministe
         if (!deterministe)
             System.out.println("Automate : \n\t Invalide - Non déterministe");
+
         return valid;
     }
 

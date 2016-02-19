@@ -20,7 +20,7 @@ public class FabriqueInterpreter {
     public Interpreter getInterpreter(String type){
         if (type.equals("Validation"))
             return InterpreterValid.getInstance();
-        else //if (type.equals("Execution"))
+        else//if (type.equals("Execution"))
             return InterpreterExec.getInstance();
 
     }
