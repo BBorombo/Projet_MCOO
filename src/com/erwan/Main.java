@@ -1,12 +1,18 @@
 package com.erwan;
 
+import java.util.ArrayList;
+
 public class Main {
 
     public static void main(String[] args) {
         // Validation de l'automate sur le premier visiteur
         Automate a = initAutomate();
         visiteurValid(a);
+
+        System.out.println("-------------------------------");
+
         // Validation de l'automate sur le second visiteur
+        // On le teste avec la dernière transition de l'automate
         Transition t = a.getTransitions().get(a.getTransitions().size()-1);
         visiteurExecution(t);
     }
@@ -18,13 +24,11 @@ public class Main {
      */
     public static void visiteurExecution(Transition t){
         InterpreterExec i = (InterpreterExec) FabriqueInterpreter.getInstance().getInterpreter("Execution");
-        boolean tranValid = (boolean) t.acceptExec(i);
-        System.out.print("Transition : ");
-        if (tranValid)
-            System.out.println("Valide");
-        else
-            System.out.println("Invalide");
-
+        ArrayList parcours = (ArrayList) t.acceptExec(i);
+        int size = parcours.size();
+        for (int j = size-1; j >= 0; j--){
+            System.out.println(parcours.get(j));
+        }
     }
 
     /**
@@ -69,7 +73,7 @@ public class Main {
         automate.ajouterEtat(e1);
         automate.ajouterEtat(e2);
         automate.ajouterEtat(e3);
-//        automate.ajouterEtat(e4);
+        automate.ajouterEtat(e4);
 
         // Ajout des transitions à l'automate
         automate.ajouterTransition(t1);

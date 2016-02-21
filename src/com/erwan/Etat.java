@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by Erwan&Jonathan on 02/02/16.
  */
-public class Etat implements ExprValid, ExprExec{
+public class Etat implements Expr {
 
     private String nom;
     private Boolean initial = false;
@@ -24,6 +24,22 @@ public class Etat implements ExprValid, ExprExec{
         this.initial = initial;
         this.finale = finale;
     }
+
+    @Override
+    public Object acceptValid(ExprVisiteurValid e) {
+        return e.visitValid(this);
+    }
+
+    @Override
+    public Object acceptExec(ExprVisiteurExec e) {
+        return e.visitExec(this);
+    }
+
+    /********************************
+     *                              *
+     *      GETTERS AND SETTERS     *
+     *                              *
+     ********************************/
 
     public void ajouterSousAutomate(Automate a){
         sousAutomates.add(a);
@@ -73,13 +89,4 @@ public class Etat implements ExprValid, ExprExec{
 
     public void setTransCible(ArrayList<Transition> transCible) { this.transCible = transCible; }
 
-    @Override
-    public Object acceptValid(ExprVisiteurValid e) {
-        return e.visitValid(this);
-    }
-
-    @Override
-    public Object acceptExec(ExprVisiteurExec e) {
-        return e.visitExec(this);
-    }
 }

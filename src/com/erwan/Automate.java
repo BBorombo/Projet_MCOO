@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by Erwan&Jonathan on 02/02/16.
  */
-public class Automate implements ExprValid, ExprExec {
+public class Automate implements Expr {
 
     private Etat etatCourant;
     private ArrayList<Etat> etats = new ArrayList<>();
@@ -32,6 +32,22 @@ public class Automate implements ExprValid, ExprExec {
         return res;
     }
 
+    @Override
+    public Object acceptValid(ExprVisiteurValid e) {
+        return e.visitValid(this);
+    }
+
+    @Override
+    public Object acceptExec(ExprVisiteurExec e) {
+        return e.visitExec(this);
+    }
+
+    /********************************
+     *                              *
+     *      GETTERS AND SETTERS     *
+     *                              *
+     ********************************/
+
     public ArrayList<Etat> getEtats() {
         return etats;
     }
@@ -48,13 +64,4 @@ public class Automate implements ExprValid, ExprExec {
         this.transitions = transitions;
     }
 
-    @Override
-    public Object acceptValid(ExprVisiteurValid e) {
-        return e.visitValid(this);
-    }
-
-    @Override
-    public Object acceptExec(ExprVisiteurExec e) {
-        return e.visitExec(this);
-    }
 }

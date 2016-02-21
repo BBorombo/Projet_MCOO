@@ -15,6 +15,10 @@ public final class InterpreterValid extends Interpreter implements ExprVisiteurV
         super();
     }
 
+    /**
+     * Fonction qui permet de retourner l'instance de la classe
+     * @return instance
+     */
     public final static InterpreterValid getInstance() {
         if (instance == null)
             instance = new InterpreterValid();

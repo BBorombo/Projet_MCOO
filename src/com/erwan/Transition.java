@@ -3,7 +3,7 @@ package com.erwan;
 /**
  * Created by Erwan&Jonathan on 02/02/16.
  */
-public class Transition implements ExprValid, ExprExec {
+public class Transition implements Expr {
 
     private Etat source;
     private Etat cible;
@@ -20,6 +20,23 @@ public class Transition implements ExprValid, ExprExec {
         this.etiquette.getTransitions().add(this);
 
     }
+
+    @Override
+    public Object acceptValid(ExprVisiteurValid e) {
+        return e.visitValid(this);
+    }
+
+    @Override
+    public Object acceptExec(ExprVisiteurExec e) {
+        return e.visitExec(this);
+    }
+
+    /********************************
+     *                              *
+     *      GETTERS AND SETTERS     *
+     *                              *
+     ********************************/
+
 
     public Etat getSource() {
         return source;
@@ -53,13 +70,4 @@ public class Transition implements ExprValid, ExprExec {
         this.automate = automate;
     }
 
-    @Override
-    public Object acceptValid(ExprVisiteurValid e) {
-        return e.visitValid(this);
-    }
-
-    @Override
-    public Object acceptExec(ExprVisiteurExec e) {
-        return e.visitExec(this);
-    }
 }
